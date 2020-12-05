@@ -2,5 +2,14 @@
     <string name="app_name">queer_hack_2020_submission</string>
 
     <string name="image_title">A cute dog</string>
+    <string name="sign_up_instead">Sign Up Instead</string>
+    <string name="login">Log In</string>
+    <string name="password_label">Password:</string>
+    <string name="email">Email:</string>
+    <string name="new_user_label">New User?</string>
+    <string name="confirm_password_label">Confirm Password:</string>
+    <string name="sign_up">Sign Up</string>
+    <string name="old_user_label">Returning User?</string>
+    <string name="sign_in_instead">Sign In Instead</string>
 
 </resources>
