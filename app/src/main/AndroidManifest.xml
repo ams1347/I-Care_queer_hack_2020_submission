@@ -11,12 +11,14 @@
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:theme="@style/Theme.Queer_hack_2020_submission">
+        android:theme="@style/CustomAppTheme">
         <activity android:name=".SignUpActivity"
-                android:noHistory="true"/>
+                android:noHistory="true"
+            android:label="Sign up for CareCheck"/>
         <activity
             android:name=".LogInActivity"
-            android:noHistory="true">
+            android:noHistory="true"
+            android:label="Log in to CareCheck">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

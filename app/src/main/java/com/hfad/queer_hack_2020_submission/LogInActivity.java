@@ -2,6 +2,7 @@ package com.hfad.queer_hack_2020_submission;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -30,6 +31,8 @@ public class LogInActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_log_in);
+        Toolbar toolbar = findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
 
         mEmailField = findViewById(R.id.email);
         mPasswordField = findViewById(R.id.password);
@@ -44,6 +47,7 @@ public class LogInActivity extends AppCompatActivity {
     private void updateUI(FirebaseUser currentUser) {
         if (currentUser != null) {
             Intent intent = new Intent(this, MainActivity.class);
+            intent.putExtra(MainActivity.FIRST_TIME, true);
             startActivity(intent);
         } else {
             //nothing needs to be done
@@ -78,7 +82,6 @@ public class LogInActivity extends AppCompatActivity {
         if (!validateForm()) {
             return;
         }
-
         String email = mEmailField.getText().toString();
         String password = mPasswordField.getText().toString();
         mAuth.signInWithEmailAndPassword(email, password)
