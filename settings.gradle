@@ -1,0 +1,2 @@
+include ':app'
+rootProject.name = "queer_hack_2020_submission"
