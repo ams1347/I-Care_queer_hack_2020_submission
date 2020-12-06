@@ -18,7 +18,7 @@ import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 
-public class LogInActivity extends AppCompatActivity {
+public class SignInActivity extends AppCompatActivity {
 
     private static final String TAG = "MainActivity";
     private FirebaseAuth mAuth;
@@ -30,42 +30,32 @@ public class LogInActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_log_in);
+        setContentView(R.layout.activity_sign_in);
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
         mEmailField = findViewById(R.id.email);
         mPasswordField = findViewById(R.id.password);
-
         mAuth = FirebaseAuth.getInstance();
-
         FirebaseUser currentUser = mAuth.getCurrentUser();
-        updateUI(currentUser);
+        proceedIfSignedIn(currentUser);
 
     }
 
-    private void updateUI(FirebaseUser currentUser) {
+    private void proceedIfSignedIn(FirebaseUser currentUser) {
         if (currentUser != null) {
-//            Intent intent = new Intent(this, MainActivity.class);
-//            intent.putExtra(MainActivity.FIRST_TIME, true);
-//            startActivity(intent);
-
             Intent intent = new Intent(this, TempActivity.class);
             intent.putExtra(TempActivity.QUESTION_NUM, 1);
             startActivity(intent);
-
-        } else {
-            //nothing needs to be done
         }
     }
 
 
     private boolean validateForm() {
         boolean valid = true;
-
         String email = mEmailField.getText().toString();
         if (TextUtils.isEmpty(email)) {
-            mEmailField.setError("An email is required for log in!");
+            mEmailField.setError("Please input your email.");
             valid = false;
         } else {
             mEmailField.setError(null);
@@ -73,7 +63,7 @@ public class LogInActivity extends AppCompatActivity {
 
         String password = mPasswordField.getText().toString();
         if (TextUtils.isEmpty(password)) {
-            mPasswordField.setError("A password is required for log in!");
+            mPasswordField.setError("Please input your password");
             valid = false;
         } else {
             mPasswordField.setError(null);
@@ -95,16 +85,16 @@ public class LogInActivity extends AppCompatActivity {
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         if (task.isSuccessful()) {
                             // Sign in success, update UI with the signed-in user's information
-                            Log.d(TAG, "signInWithEmail:success");
+                            Log.d(TAG, "signInWithEmail : success");
                             FirebaseUser user = mAuth.getCurrentUser();
-                            updateUI(user);
+                            proceedIfSignedIn(user);
                         } else {
                             // If sign in fails, display a message to the user.
                             Exception e = task.getException();
-                            Log.w(TAG, "signInWithEmail:failure", e);
-                            Toast.makeText(LogInActivity.this, "Login failed: " + e.getLocalizedMessage(),
+                            Log.w(TAG, "signInWithEmail : failure", e);
+                            Toast.makeText(SignInActivity.this, "Login failed: " + e.getLocalizedMessage(),
                                     Toast.LENGTH_LONG).show();
-                            updateUI(null);
+                            proceedIfSignedIn(null);
                         }
                     }
                 });

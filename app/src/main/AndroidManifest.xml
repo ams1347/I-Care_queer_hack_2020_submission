@@ -12,12 +12,17 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/CustomAppTheme">
-        <activity android:name=".TempActivity"></activity>
+        <activity android:name=".TempActivity"/>
+        <activity android:name=".MoodSelectorActivity2" />
+        <activity android:name=".questiontextActivity" />
+        <activity android:name=".StandardQuestionActivity" />
+        <activity android:name=".StandardImageQuestionActivity" />
+        <activity android:name=".WelcomeActivity2" />
         <activity
             android:name=".SignUpActivity"
             android:noHistory="true" />
         <activity
-            android:name=".LogInActivity"
+            android:name=".SignInActivity"
             android:noHistory="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
