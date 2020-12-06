@@ -15,5 +15,8 @@
     <string name="meal_question">Have you eaten three full meals today?</string>
     <string name="yes_message">YES</string>
     <string name="no_message">NO</string>
+    <string name="feed">Feed!</string>
+    <string name="play">Play!</string>
+    <string name="go_to_shop">Go to shop</string>
 
 </resources>

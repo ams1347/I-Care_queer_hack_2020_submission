@@ -18,8 +18,10 @@ import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FirebaseFirestore;
 
+import java.util.Collection;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -60,6 +62,7 @@ public class SignUpActivity extends AppCompatActivity {
             Map<String, Object> newUser = new HashMap<>();
             newUser.put("userID", currentUser.getUid());
             newUser.put("userEmail", currentUser.getEmail());
+            newUser.put("coins", 0);
 
             mDb.collection("users").document(currentUser.getUid())
                     .set(newUser)
@@ -69,6 +72,18 @@ public class SignUpActivity extends AppCompatActivity {
                             Log.d(TAG, "User document successfully written!");
                         }
                     });
+
+            Question personalQuestions = new Question("How are you feeling today?");
+
+            mDb.collection("users").document(currentUser.getUid())
+                    .collection("questions").add(personalQuestions)
+                    .addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
+                        @Override
+                        public void onSuccess(DocumentReference documentReference) {
+                            Log.d(TAG, "Personal Question collection created");
+                        }
+                    });
+
             Intent intent = new Intent(this, MainActivity.class);
             intent.putExtra(MainActivity.FIRST_TIME, true);
             startActivity(intent);

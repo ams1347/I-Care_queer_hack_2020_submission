@@ -13,39 +13,63 @@
         app:layout_constraintStart_toStartOf="parent"
         />
 
-    <LinearLayout
+    <ImageView
+        android:id="@+id/pet_image"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:padding="16dp"
-        android:orientation="vertical"
-        tools:context=".MainActivity"
+        android:layout_height="wrap_content"
+        android:src="@drawable/image"
         app:layout_constraintTop_toBottomOf="@+id/toolbar"
-        app:layout_constraintStart_toStartOf="parent">
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"/>
 
-        <ImageView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:src="@drawable/image"/>
+    <TextView
+        android:id="@+id/pet_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/image_title"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="10dp"
+        android:textSize="40sp"
+        app:layout_constraintTop_toBottomOf="@+id/pet_image"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        />
 
-        <TextView
-            android:id="@+id/image_caption"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/image_title"
-            android:layout_gravity="center_horizontal"
-            android:paddingTop="14dp"
-            android:layout_marginTop="14dp"
-            />
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:orientation="horizontal"
+        tools:context=".MainActivity"
+        app:layout_constraintTop_toBottomOf="@+id/pet_name"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent">
 
         <Button
-            android:id="@+id/cool_button"
-            android:layout_width="match_parent"
+            android:id="@+id/feed_button"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Go to shop"
-            android:layout_gravity="center_horizontal"
+            android:text="@string/feed"
             android:layout_marginTop="25dp"
             android:onClick="goToShop"/>
 
+        <Button
+            android:id="@+id/play_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/play"
+            android:layout_marginTop="25dp"
+            android:onClick="goToShop"
+            android:layout_marginLeft="15dp"
+            android:layout_marginRight="15dp"/>
+
+        <Button
+            android:id="@+id/shop_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/go_to_shop"
+            android:layout_marginTop="25dp"
+            android:onClick="goToShop"/>
 
     </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

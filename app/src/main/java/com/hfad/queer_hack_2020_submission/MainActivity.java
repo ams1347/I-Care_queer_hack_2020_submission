@@ -33,7 +33,7 @@ public class MainActivity extends AppCompatActivity {
         this.first = getIntent().getBooleanExtra(FIRST_TIME, false);
 
 
-        TextView coolText = findViewById(R.id.image_caption);
+        TextView coolText = findViewById(R.id.pet_name);
         coolText.setText("Hello again");
     }
 
@@ -43,7 +43,7 @@ public class MainActivity extends AppCompatActivity {
         if(this.first){
             CharSequence addedMsg = "Welcome, " + this.mAuth.getCurrentUser().getEmail() + "!";
             int duration = Snackbar.LENGTH_SHORT;
-            Snackbar snackbar = Snackbar.make(findViewById(R.id.image_caption), addedMsg, duration);
+            Snackbar snackbar = Snackbar.make(findViewById(R.id.pet_name), addedMsg, duration);
             snackbar.setAction("Log Out", new View.OnClickListener(){
                 @Override
                 public void onClick(View view) {
