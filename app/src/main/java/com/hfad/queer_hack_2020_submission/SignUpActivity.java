@@ -18,10 +18,10 @@ import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FirebaseFirestore;
 
-import java.util.Collection;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -73,19 +73,39 @@ public class SignUpActivity extends AppCompatActivity {
                         }
                     });
 
-            Question personalQuestions = new Question("How are you feeling today?");
-
-            mDb.collection("users").document(currentUser.getUid())
-                    .collection("questions").add(personalQuestions)
+            Question personalQuestion1 = new Question("How's your mood today?", "moodScale");
+            Question personalQuestion2 = new Question("Did you eat 3 square meals today?");
+            Question personalQuestion3 = new Question("Did you drink at least 8 cups of water today?");
+            CollectionReference userQs = mDb.collection("users").document(currentUser.getUid())
+                    .collection("questions");
+            userQs.add(personalQuestion1)
                     .addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
                         @Override
                         public void onSuccess(DocumentReference documentReference) {
                             Log.d(TAG, "Personal Question collection created");
                         }
                     });
+            userQs.add(personalQuestion2)
+                    .addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
+                        @Override
+                        public void onSuccess(DocumentReference documentReference) {
+                            Log.d(TAG, "q2 added");
+                        }
+                    });
+            userQs.add(personalQuestion3)
+                    .addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
+                        @Override
+                        public void onSuccess(DocumentReference documentReference) {
+                            Log.d(TAG, "q3 added");
+                        }
+                    });
 
-            Intent intent = new Intent(this, MainActivity.class);
-            intent.putExtra(MainActivity.FIRST_TIME, true);
+//            Intent intent = new Intent(this, MainActivity.class);
+//            intent.putExtra(MainActivity.FIRST_TIME, true);
+//            startActivity(intent);
+
+            Intent intent = new Intent(this, TempActivity.class);
+            intent.putExtra(TempActivity.QUESTION_NUM, 1);
             startActivity(intent);
         }
     }

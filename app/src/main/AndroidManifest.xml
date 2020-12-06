@@ -12,7 +12,7 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/CustomAppTheme">
-        <activity android:name=".StandardQuestionActivity"></activity>
+        <activity android:name=".TempActivity"></activity>
         <activity
             android:name=".SignUpActivity"
             android:noHistory="true" />

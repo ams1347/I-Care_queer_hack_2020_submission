@@ -19,4 +19,12 @@
     <string name="play">Play!</string>
     <string name="go_to_shop">Go to shop</string>
 
+    <string-array name="moods">
+        <item>5 - Very positive</item>
+        <item>4 - Somewhat positive</item>
+        <item>3 - Neutral</item>
+        <item>2 - Somewhat negative</item>
+        <item>1 - Very negative</item>
+    </string-array>
+
 </resources>

@@ -46,9 +46,14 @@ public class LogInActivity extends AppCompatActivity {
 
     private void updateUI(FirebaseUser currentUser) {
         if (currentUser != null) {
-            Intent intent = new Intent(this, MainActivity.class);
-            intent.putExtra(MainActivity.FIRST_TIME, true);
+//            Intent intent = new Intent(this, MainActivity.class);
+//            intent.putExtra(MainActivity.FIRST_TIME, true);
+//            startActivity(intent);
+
+            Intent intent = new Intent(this, TempActivity.class);
+            intent.putExtra(TempActivity.QUESTION_NUM, 1);
             startActivity(intent);
+
         } else {
             //nothing needs to be done
         }
