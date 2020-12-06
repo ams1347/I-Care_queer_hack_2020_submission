@@ -4,6 +4,7 @@ public class User {
     private String userID;
     private String email;
     private String documentRef;
+    private int coins;
 
     public User() {
     }
@@ -35,6 +36,11 @@ public class User {
 
     public void setDocumentRef(String documentRef) {
         this.documentRef = documentRef;
+    }
+
+    public void updatePoints(int newPoints)
+    {
+        coins+= newPoints;
     }
 
     @Override
