@@ -2,6 +2,7 @@ package com.hfad.queer_hack_2020_submission;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -33,10 +34,14 @@ public class SignUpActivity extends AppCompatActivity {
     private EditText mPasswordField;
     private EditText mConfirmPasswordField;
 
+    private Toast toast;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_sign_up);
+        Toolbar toolbar = findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
 
         mEmailField = findViewById(R.id.email);
         mPasswordField = findViewById(R.id.password);
@@ -64,8 +69,8 @@ public class SignUpActivity extends AppCompatActivity {
                             Log.d(TAG, "User document successfully written!");
                         }
                     });
-
             Intent intent = new Intent(this, MainActivity.class);
+            intent.putExtra(MainActivity.FIRST_TIME, true);
             startActivity(intent);
         }
     }

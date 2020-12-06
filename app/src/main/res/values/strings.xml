@@ -11,6 +11,7 @@
     <string name="sign_up">Sign Up</string>
     <string name="old_user_label">Returning User?</string>
     <string name="sign_in_instead">Sign In Instead</string>
+    <string name="logout">Log out</string>
     <string name="meal_question">Have you eaten three full meals today?</string>
     <string name="yes_message">YES</string>
     <string name="no_message">NO</string>
