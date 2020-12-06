@@ -29,14 +29,10 @@ public class SignUpActivity extends AppCompatActivity {
 
     private static final String TAG = "MainActivity";
     private FirebaseAuth mAuth;
-
-    private final FirebaseFirestore mDb = FirebaseFirestore.getInstance();
-
     private EditText mEmailField;
     private EditText mPasswordField;
     private EditText mConfirmPasswordField;
-
-    private Toast toast;
+    private final FirebaseFirestore mDb = FirebaseFirestore.getInstance();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -44,35 +40,28 @@ public class SignUpActivity extends AppCompatActivity {
         setContentView(R.layout.activity_sign_up);
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-
+        mConfirmPasswordField = findViewById(R.id.confirm_password);
         mEmailField = findViewById(R.id.email);
         mPasswordField = findViewById(R.id.password);
-        mConfirmPasswordField = findViewById(R.id.confirm_password);
-
         mAuth = FirebaseAuth.getInstance();
-
         FirebaseUser currentUser = mAuth.getCurrentUser();
-        updateUI(currentUser);
-
+        attemptToLogIn(currentUser);
     }
 
-    private void updateUI(FirebaseUser currentUser) {
+    private void attemptToLogIn(FirebaseUser currentUser) {
         if (currentUser != null) {
-
             Map<String, Object> newUser = new HashMap<>();
             newUser.put("userID", currentUser.getUid());
             newUser.put("userEmail", currentUser.getEmail());
             newUser.put("coins", 0);
-
             mDb.collection("users").document(currentUser.getUid())
                     .set(newUser)
                     .addOnSuccessListener(new OnSuccessListener<Void>() {
                         @Override
                         public void onSuccess(Void aVoid) {
-                            Log.d(TAG, "User document successfully written!");
+                            Log.d(TAG, "User successfully created");
                         }
                     });
-
             Question personalQuestion1 = new Question("How's your mood today?", "moodScale");
             Question personalQuestion2 = new Question("Did you eat 3 square meals today?");
             Question personalQuestion3 = new Question("Did you drink at least 8 cups of water today?");
@@ -82,7 +71,7 @@ public class SignUpActivity extends AppCompatActivity {
                     .addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
                         @Override
                         public void onSuccess(DocumentReference documentReference) {
-                            Log.d(TAG, "Personal Question collection created");
+                            Log.d(TAG, "q1 added");
                         }
                     });
             userQs.add(personalQuestion2)
@@ -99,11 +88,6 @@ public class SignUpActivity extends AppCompatActivity {
                             Log.d(TAG, "q3 added");
                         }
                     });
-
-//            Intent intent = new Intent(this, MainActivity.class);
-//            intent.putExtra(MainActivity.FIRST_TIME, true);
-//            startActivity(intent);
-
             Intent intent = new Intent(this, TempActivity.class);
             intent.putExtra(TempActivity.QUESTION_NUM, 1);
             startActivity(intent);
@@ -113,33 +97,29 @@ public class SignUpActivity extends AppCompatActivity {
 
     private boolean validateForm() {
         boolean valid = true;
-
         String email = mEmailField.getText().toString();
         if (TextUtils.isEmpty(email)) {
-            mEmailField.setError("Please use your email to sign up.");
+            mEmailField.setError("Please input an email to sign up.");
             valid = false;
         } else {
             mEmailField.setError(null);
         }
-
         String user_password = mPasswordField.getText().toString();
         if (TextUtils.isEmpty(user_password)) {
-            mPasswordField.setError("Please create a password to sign up.");
+            mPasswordField.setError("Please input a password to sign up.");
             valid = false;
         } else {
             mPasswordField.setError(null);
         }
-
         String confirm_password = mConfirmPasswordField.getText().toString();
         if (TextUtils.isEmpty(confirm_password)) {
-            mConfirmPasswordField.setError("Please type your password again for security.");
+            mConfirmPasswordField.setError("Please type your password again to confirm.");
             valid = false;
         } else {
             mConfirmPasswordField.setError(null);
         }
-
         if (!user_password.equals(confirm_password)) {
-            mConfirmPasswordField.setError("Your passwords do not match. Please try again!");
+            mConfirmPasswordField.setError("Your passwords do not match!");
             valid = false;
         } else {
             mConfirmPasswordField.setError(null);
@@ -153,39 +133,37 @@ public class SignUpActivity extends AppCompatActivity {
         if (!validateForm()) {
             return;
         }
-
         String email = mEmailField.getText().toString();
         String password = mPasswordField.getText().toString();
-
         mAuth.createUserWithEmailAndPassword(email, password)
                 .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         if (task.isSuccessful()) {
                             // Sign in success, update UI with the signed-in user's information
-                            Log.d(TAG, "createUserWithEmail:success");
+                            Log.d(TAG, "createUserWithEmail : success");
                             FirebaseUser user = mAuth.getCurrentUser();
-                            updateUI(user);
+                            attemptToLogIn(user);
                         } else {
                             // If registration fails, display a message to the user.
                             Exception e = task.getException();
-                            Log.w(TAG, "createUserWithEmail:failure", e);
+                            Log.w(TAG, "createUserWithEmail : failure", e);
                             Toast.makeText(SignUpActivity.this, "Registration failed: " + e.getLocalizedMessage(),
                                     Toast.LENGTH_LONG).show();
-                            updateUI(null);
+                            attemptToLogIn(null);
                         }
                     }
                 });
     }
 
-    public void sendToLogIn(View view) {
-        Intent intent = new Intent(this, LogInActivity.class);
+    public void logInInstead(View view) {
+        Intent intent = new Intent(this, SignInActivity.class);
         startActivity(intent);
     }
 
     @Override
     public void onBackPressed() {
-        Intent intent = new Intent(this, LogInActivity.class);
+        Intent intent = new Intent(this, SignInActivity.class);
         startActivity(intent);
     }
 }
