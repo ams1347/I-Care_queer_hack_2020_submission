@@ -4,7 +4,7 @@ public class User {
     private String userID;
     private String email;
     private String documentRef;
-    private int coins;
+    private int coins = 0;
 
     public User() {
     }
@@ -49,5 +49,13 @@ public class User {
                 "email='" + email + '\'' +
                 ", collection='" + documentRef + '\'' +
                 '}';
+    }
+
+    public int getCoins() {
+        return coins;
+    }
+
+    public void setCoins(int coins) {
+        this.coins = coins;
     }
 }

@@ -44,6 +44,6 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"
         android:layout_marginTop="25dp"
-        android:text="frog" />
+        android:text="@string/frog" />
 </LinearLayout>
 

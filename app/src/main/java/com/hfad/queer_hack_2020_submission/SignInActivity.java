@@ -1,9 +1,7 @@
 package com.hfad.queer_hack_2020_submission;
-
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
-
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
@@ -11,13 +9,11 @@ import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.Toast;
-
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
-
 public class SignInActivity extends AppCompatActivity {
 
     private static final String TAG = "MainActivity";
@@ -44,12 +40,14 @@ public class SignInActivity extends AppCompatActivity {
 
     private void proceedIfSignedIn(FirebaseUser currentUser) {
         if (currentUser != null) {
-            Intent intent = new Intent(this, TempActivity.class);
-            intent.putExtra(TempActivity.QUESTION_NUM, 1);
+            //            Intent intent = new Intent(this, TempActivity.class);
+//            intent.putExtra(TempActivity.QUESTION_NUM, 1);
+//            startActivity(intent);
+
+            Intent intent = new Intent(this, MoodSelectorActivity.class);
             startActivity(intent);
         }
     }
-
 
     private boolean validateForm() {
         boolean valid = true;
@@ -71,7 +69,6 @@ public class SignInActivity extends AppCompatActivity {
 
         return valid;
     }
-
 
     public void signIn(View view) {
         if (!validateForm()) {
@@ -109,5 +106,4 @@ public class SignInActivity extends AppCompatActivity {
     public void onBackPressed() {
         //do nothing
     }
-
 }

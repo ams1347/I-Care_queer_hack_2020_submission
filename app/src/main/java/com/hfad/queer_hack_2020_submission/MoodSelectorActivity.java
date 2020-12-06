@@ -3,24 +3,26 @@ package com.hfad.queer_hack_2020_submission;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
+
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
+
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
+
 import java.util.ArrayList;
 import java.util.List;
 
-public class TempActivity extends AppCompatActivity {
+public class MoodSelectorActivity extends AppCompatActivity {
 
-    private static final String TAG = "TempActivity";
-    public static final String QUESTION_NUM = "question number";
+    private static final String TAG = "MoodSelectorActivity";
     private FirebaseAuth mAuth;
     private final FirebaseFirestore mDb = FirebaseFirestore.getInstance();
 
@@ -31,13 +33,13 @@ public class TempActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_temp);
+        setContentView(R.layout.activity_mood_selector);
 
         mAuth = FirebaseAuth.getInstance();
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-        questionText = findViewById(R.id.question_text);
+        questionText = findViewById(R.id.select_mood_question);
 
         mDb.collection("users").document(mAuth.getCurrentUser().getUid())
                 .collection("questions").get()
@@ -49,8 +51,8 @@ public class TempActivity extends AppCompatActivity {
                                 Question newQuestion = document.toObject(Question.class);
                                 Log.d(TAG, "Question: " + newQuestion.getQuestion());
                                 usersQuestions.add(newQuestion);
-                                currentQuestionNumber = getIntent().getIntExtra(QUESTION_NUM, 1);
-                                updateUI();
+                                currentQuestionNumber = 1;
+//                                updateUI();
                             }
                         }
                     }
@@ -58,19 +60,14 @@ public class TempActivity extends AppCompatActivity {
     }
 
     private void updateUI(){
-        if(currentQuestionNumber > usersQuestions.size()){
-            Intent intent = new Intent(this, MainActivity.class);
-            intent.putExtra(MainActivity.FIRST_TIME, true);
+            Intent intent = new Intent(this, StandardImageQuestionActivity.class);
+            intent.putExtra(StandardImageQuestionActivity.QUESTION_NUM, currentQuestionNumber);
             startActivity(intent);
-        } else {
-            questionText.setText(usersQuestions.get(currentQuestionNumber - 1).getQuestion());
-        }
     }
 
     public void proceedToNext(View v){
         currentQuestionNumber++;
         updateUI();
     }
-
 
 }

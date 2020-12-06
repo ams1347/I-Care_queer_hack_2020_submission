@@ -13,7 +13,7 @@
         android:supportsRtl="true"
         android:theme="@style/CustomAppTheme">
         <activity android:name=".TempActivity"/>
-        <activity android:name=".MoodSelectorActivity2" />
+        <activity android:name=".MoodSelectorActivity" />
         <activity android:name=".questiontextActivity" />
         <activity android:name=".StandardQuestionActivity" />
         <activity android:name=".StandardImageQuestionActivity" />

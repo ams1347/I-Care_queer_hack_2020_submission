@@ -88,12 +88,15 @@ public class SignUpActivity extends AppCompatActivity {
                             Log.d(TAG, "q3 added");
                         }
                     });
-            Intent intent = new Intent(this, TempActivity.class);
-            intent.putExtra(TempActivity.QUESTION_NUM, 1);
+//            Intent intent = new Intent(this, TempActivity.class);
+//            intent.putExtra(TempActivity.QUESTION_NUM, 1);
+//            startActivity(intent);
+
+            Intent intent = new Intent(this, MoodSelectorActivity.class);
             startActivity(intent);
+
         }
     }
-
 
     private boolean validateForm() {
         boolean valid = true;
@@ -124,10 +127,8 @@ public class SignUpActivity extends AppCompatActivity {
         } else {
             mConfirmPasswordField.setError(null);
         }
-
         return valid;
     }
-
 
     public void createAccount(View view) {
         if (!validateForm()) {
@@ -166,4 +167,6 @@ public class SignUpActivity extends AppCompatActivity {
         Intent intent = new Intent(this, SignInActivity.class);
         startActivity(intent);
     }
+
+
 }

@@ -4,37 +4,37 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".questiontextActivity"
-    android:orientation="vertical"
-    android:background="@color/peach">
+    tools:context=".MoodSelectorActivity"
+    android:orientation="vertical">
 
 
     <TextView
-        android:id="@+id/image_caption"
+        android:id="@+id/select_mood_question"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"
-        android:layout_marginTop="14dp"
+        android:layout_marginTop="35dp"
         android:paddingTop="14dp"
-        android:text="@string/mood"
-        android:textSize="20sp" />
+        android:text="@string/select_mood"
+        android:textSize="30sp" />
 
-
-    <ImageButton
-        android:id="@+id/simpleImageButton"
-        android:layout_width="195dp"
-        android:layout_height="202dp"
-        android:background="@null"
-        android:src="@drawable/slightlysmiley" />
-
-    <Button
+    <Spinner
+        android:id="@+id/mood_selector"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_gravity="center_horizontal"
         android:layout_marginTop="25dp"
-        android:onClick="goToShop"
-        android:text="@string/bear"
-        tools:ignore="OnClick" />
+        android:layout_gravity="center_horizontal"
+        android:entries="@array/moods"
+        />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/continue_str"
+        android:textSize="20sp"
+        android:layout_marginTop="35dp"
+        android:layout_gravity="center_horizontal"
+        android:onClick="proceedToNext"/>
 
 </LinearLayout>
 
