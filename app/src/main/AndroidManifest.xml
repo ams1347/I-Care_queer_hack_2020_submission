@@ -12,8 +12,10 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/CustomAppTheme">
-        <activity android:name=".SignUpActivity"
-                android:noHistory="true"/>
+        <activity android:name=".TempActivity"></activity>
+        <activity
+            android:name=".SignUpActivity"
+            android:noHistory="true" />
         <activity
             android:name=".LogInActivity"
             android:noHistory="true">
@@ -24,7 +26,7 @@
             </intent-filter>
         </activity>
         <activity android:name=".ShopActivity" />
-        <activity android:name=".MainActivity"/>
+        <activity android:name=".MainActivity" />
     </application>
 
 </manifest>
